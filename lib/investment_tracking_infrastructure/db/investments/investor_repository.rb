@@ -11,7 +11,11 @@ module Investments
     end
 
     def create_investor(investor)
-      @db.insert(name: investor.name)
+      @db.insert(
+        name: investor.name,
+        created_at: DateTime.now,
+        updated_at: DateTime.now
+      )
     end
   end
 end
