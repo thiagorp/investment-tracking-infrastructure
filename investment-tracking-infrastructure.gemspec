@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths   = ['lib']
   s.required_ruby_version = '>= 2.3.0'
 
+  s.add_dependency('pg', '~>0.18')
   s.add_dependency('sequel', '~>4.30')
 
   s.add_development_dependency('rake', '~>10.5')
