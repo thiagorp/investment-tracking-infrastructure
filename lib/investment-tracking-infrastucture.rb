@@ -1,1 +1,2 @@
-
+require 'investment_tracking_infrastructure/db'
+require 'investment_tracking_infrastructure/db/investor_repository'
