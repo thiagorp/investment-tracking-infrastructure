@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/thiagorp/investment-tracking-domain
-  revision: acb0d4fac912f29d61ac2dfbb6b8fc148bf9cf48
+  revision: 7b8281620038843a08b5ab728b6bbf1f446de0da
   specs:
     investment-tracking-domain (0.0.1)
 

@@ -26,6 +26,39 @@ class InvestorRepositoryTest < MiniTest::Test
     assert_equal investor_id, 123
   end
 
+  def test_it_gets_an_investor
+    # Setup
+    db_return_params = { id: 123, name: 'Investor Name' }
+    investor_class = MiniTest::Mock.new
+    db = MiniTest::Mock.new
+    repository = Investments::InvestorRepository.new(
+      investor_repository_params(
+        investor_class: investor_class,
+        db: db
+      )
+    )
+
+    investor_class.expect(
+      :new,
+      'fetched investor',
+      [
+        db_return_params.merge(repository: repository)
+      ]
+    )
+
+    db.expect :select, db, [:id, :name]
+    db.expect :where, db, [id: 134]
+    db.expect :first, db_return_params
+
+    # Exercise
+    investor = repository.get_investor(134)
+
+    # Verify
+    investor_class.verify
+    db.verify
+    assert_equal investor, 'fetched investor'
+  end
+
   private
 
   def timestamp_params
