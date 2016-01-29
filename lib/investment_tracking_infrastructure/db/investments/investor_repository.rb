@@ -24,9 +24,17 @@ module Investments
     end
 
     def get_investor(investor_id)
-      @investor_class.new(
-        @db.select(:id, :name).where(id: investor_id).first.merge(repository: self)
-      )
+      if investor_data = find_investor_by_id(investor_id)
+        @investor_class.new(
+          investor_data.merge(repository: self)
+        )
+      end
+    end
+
+    private
+
+    def find_investor_by_id(investor_id)
+      @db.select(:id, :name).where(id: investor_id).first
     end
   end
 end

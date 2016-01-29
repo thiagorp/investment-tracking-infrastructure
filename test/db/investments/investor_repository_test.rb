@@ -59,6 +59,25 @@ class InvestorRepositoryTest < MiniTest::Test
     assert_equal investor, 'fetched investor'
   end
 
+  def test_it_returns_nil_if_investor_is_not_found
+    # Setup
+    db = MiniTest::Mock.new
+    repository = Investments::InvestorRepository.new(
+      investor_repository_params(db: db)
+    )
+
+    db.expect :select, db, [:id, :name]
+    db.expect :where, db, [id: 134]
+    db.expect :first, nil
+
+    # Exercise
+    investor = repository.get_investor(134)
+
+    # Verify
+    db.verify
+    assert_equal investor, nil
+  end
+
   private
 
   def timestamp_params
